@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Segundo Parcial Laboratorio III</title>
+		<link rel="stylesheet" href="css/style.css" />
+		<script src="js/clases.js"></script>
+		<script src="js/app.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<h1>ABM VEHICULOS</h1>
+			<h2>Filtros</h2>
+			<form action="" class="filter-form" id="filter-form">
+				<div class="filter-input">
+					<label for="filter-vehiculo">Filtrar por:</label>
+					<select name="filter-vehiculo" id="filter-vehiculo" onchange="filtrarTabla()">
+						<option value="0">Todos</option>
+						<option value="1">Auto</option>
+						<option value="2">Camioneta</option>
+					</select>
+				</div>
+				<div class="filter-input">
+					<label for="filter-precio">Promedio de precio:</label>
+					<input type="number" name="filter-precio" id="filter-precio" />
+				</div>
+				<button id="filter-search">Calcular Promedio</button>
+			</form>
+			<div class="promedio-precio" id="promedio-precio">
+				<h3>Promedio de precio:</h3>
+				<p id="promedio"></p>
+			</div>
+			<hr />
+			<h2>Lista de Vehiculos</h2>
+			<div class="filter-checkboxes">
+				<label for="vehiculo-id">ID <input type="checkbox" name="vehiculo-id" id="vehiculo-id" /></label>
+				<label for="vehiculo-marca">Marca <input type="checkbox" name="vehiculo-marca" id="vehiculo-marca" /></label>
+				<label for="vehiculo-modelo">Modelo <input type="checkbox" name="vehiculo-modelo" id="vehiculo-modelo" /></label>
+				<label for="vehiculo-precio">Precio <input type="checkbox" name="vehiculo-precio" id="vehiculo-precio" /></label>
+			</div>
+			<div class="list">
+				<table class="table-vehiculos">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Marca</th>
+							<th>Modelo</th>
+							<th>Precio</th>
+							<th>Acción</th>
+						</tr>
+					</thead>
+					<tbody id="table-body"></tbody>
+				</table>
+			</div>
+
+			<button id="agregar">Add</button>
+		</div>
+	</body>
+</html>
