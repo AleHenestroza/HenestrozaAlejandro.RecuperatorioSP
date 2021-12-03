@@ -1,5 +1,6 @@
 const API_URL = 'http://localhost:3001/';
 const vehiculos = [];
+let vehiculosMostrados = [];
 
 window.addEventListener('load', () => {
 	let prom = new Promise(getVehiculos);
@@ -52,6 +53,7 @@ const llenarTabla = listado => {
         `;
 		document.getElementById('table-body').appendChild(row);
 	});
+	vehiculosMostrados = listado;
 };
 
 const eliminarVehiculo = id => {
@@ -68,6 +70,7 @@ const eliminarVehiculo = id => {
 
 const filtrarTabla = () => {
 	limpiarTabla();
+	limpiarPromedio();
 	const filtro = document.getElementById('filter-vehiculo').value;
 	if (filtro === '1') {
 		const autos = vehiculos.filter(vehiculo => vehiculo instanceof Auto);
@@ -82,4 +85,14 @@ const filtrarTabla = () => {
 
 const limpiarTabla = () => {
 	document.getElementById('table-body').innerHTML = '';
+};
+const limpiarPromedio = () => {
+	document.getElementById('promedio').value = null;
+};
+
+const calcularPromedio = () => {
+	const promedio = vehiculosMostrados.reduce((acumulador, vehiculo) => {
+		return acumulador + vehiculo.precio;
+	}, 0);
+	document.getElementById('promedio').value = promedio / vehiculosMostrados.length;
 };

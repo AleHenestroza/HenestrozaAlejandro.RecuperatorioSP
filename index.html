@@ -13,8 +13,8 @@
 		<div class="container">
 			<h1>ABM VEHICULOS</h1>
 			<h2>Filtros</h2>
-			<form action="" class="filter-form" id="filter-form">
-				<div class="filter-input">
+			<div class="filters">
+				<div>
 					<label for="filter-vehiculo">Filtrar por:</label>
 					<select name="filter-vehiculo" id="filter-vehiculo" onchange="filtrarTabla()">
 						<option value="0">Todos</option>
@@ -22,15 +22,11 @@
 						<option value="2">Camioneta</option>
 					</select>
 				</div>
-				<div class="filter-input">
-					<label for="filter-precio">Promedio de precio:</label>
-					<input type="number" name="filter-precio" id="filter-precio" />
+				<div>
+					<label for="promedio">Promedio de precio:</label>
+					<input type="number" name="promedio" id="promedio" disabled />
 				</div>
-				<button id="filter-search">Calcular Promedio</button>
-			</form>
-			<div class="promedio-precio" id="promedio-precio">
-				<h3>Promedio de precio:</h3>
-				<p id="promedio"></p>
+				<button id="calcular-promedio" onclick="calcularPromedio()">Calcular Promedio</button>
 			</div>
 			<hr />
 			<h2>Lista de Vehiculos</h2>

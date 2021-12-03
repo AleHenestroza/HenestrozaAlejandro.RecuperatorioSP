@@ -21,17 +21,11 @@ body {
 	border: 1px solid black;
 	background-color: rgb(198, 221, 226);
 }
-.filter-form {
+.filters {
 	width: 100%;
 	max-width: 1200px;
 	display: flex;
 	justify-content: space-between;
-	margin: 1rem 0;
-}
-.promedio-precio {
-	width: 100%;
-	max-width: 1200px;
-	display: flex;
 	margin: 1rem 0;
 }
 .list {
