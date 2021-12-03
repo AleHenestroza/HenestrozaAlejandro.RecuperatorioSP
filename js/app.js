@@ -3,6 +3,13 @@ const vehiculos = [];
 let vehiculosMostrados = [];
 
 window.addEventListener('load', () => {
+	document.getElementById('agregar').addEventListener('click', abrirFormAlta);
+	document.getElementById('btn-exit').addEventListener('click', cerrarFormAlta);
+	document.getElementById('alta-vehiculo-tipo').addEventListener('click', mostrarInputAlta);
+	document.getElementById('btn-alta').addEventListener('click', event => {
+		event.preventDefault();
+		agregarVehiculo();
+	});
 	let prom = new Promise(getVehiculos);
 	prom
 		.then(data => {
@@ -10,6 +17,9 @@ window.addEventListener('load', () => {
 		})
 		.then(() => {
 			llenarTabla(vehiculos);
+		})
+		.catch(err => {
+			getVehiculosError(err);
 		});
 });
 
@@ -41,14 +51,18 @@ const getVehiculosSuccess = data => {
 	});
 };
 
+const getVehiculosError = err => {
+	alert(err);
+};
+
 const llenarTabla = listado => {
 	listado.forEach(vehiculo => {
 		const row = document.createElement('tr');
 		row.innerHTML = `
             <td>${vehiculo.id}</td>
-            <td>${vehiculo.marca}</td>
-            <td>${vehiculo.modelo}</td>
-            <td>${vehiculo.precio}</td>
+            <td class="column-1">${vehiculo.marca}</td>
+            <td class="column-2">${vehiculo.modelo}</td>
+            <td class="column-3">${vehiculo.precio}</td>
             <td> <button class="eliminar-vehiculo" onclick="eliminarVehiculo(${vehiculo.id})">Eliminar</button></td>
         `;
 		document.getElementById('table-body').appendChild(row);
@@ -86,6 +100,7 @@ const filtrarTabla = () => {
 const limpiarTabla = () => {
 	document.getElementById('table-body').innerHTML = '';
 };
+
 const limpiarPromedio = () => {
 	document.getElementById('promedio').value = null;
 };
@@ -95,4 +110,76 @@ const calcularPromedio = () => {
 		return acumulador + vehiculo.precio;
 	}, 0);
 	document.getElementById('promedio').value = promedio / vehiculosMostrados.length;
+};
+
+// Function that takes a column number and hides or displays based on a checkbox
+const toggleColumn = columnNumber => {
+	const column = document.getElementById(`column-${columnNumber}`);
+	const checkbox = document.getElementById(`checkbox-${columnNumber}`);
+	const tds = document.getElementsByClassName(`column-${columnNumber}`);
+	if (checkbox.checked) {
+		column.style.display = 'table-cell';
+		for (let i = 0; i < tds.length; i++) {
+			tds[i].style.display = 'table-cell';
+		}
+	} else {
+		column.style.display = 'none';
+		for (let i = 0; i < tds.length; i++) {
+			tds[i].style.display = 'none';
+		}
+	}
+};
+
+const abrirFormAlta = () => {
+	mostrarInputAlta();
+	document.getElementById('alta').classList.remove('hidden');
+};
+
+const cerrarFormAlta = () => {
+	document.getElementById('alta').classList.add('hidden');
+};
+
+const mostrarInputAlta = () => {
+	const tipo = document.getElementById('alta-vehiculo-tipo').value;
+	if (tipo === '1') {
+		document.getElementById('input-auto').classList.remove('hidden');
+		document.getElementById('input-camioneta').classList.add('hidden');
+	} else if (tipo === '2') {
+		document.getElementById('input-camioneta').classList.remove('hidden');
+		document.getElementById('input-auto').classList.add('hidden');
+	}
+};
+
+const getNextId = () => {
+	let id = 0;
+	vehiculos.forEach(vehiculo => {
+		if (vehiculo.id > id) {
+			id = vehiculo.id;
+		}
+	});
+	return id + 1;
+};
+
+const agregarVehiculo = () => {
+	const tipo = document.getElementById('alta-vehiculo-tipo').value;
+	const marca = document.getElementById('alta-vehiculo-marca').value;
+	const modelo = document.getElementById('alta-vehiculo-modelo').value;
+	const precio = document.getElementById('alta-vehiculo-precio').value;
+	const id = getNextId();
+	if (marca !== '' && modelo !== '' && precio !== '') {
+		if (tipo === '1') {
+			const cantidadPuertas = document.getElementById('alta-vehiculo-puertas').value;
+			const auto = new Auto(id, marca, modelo, precio, cantidadPuertas);
+			vehiculos.push(auto);
+		} else if (tipo === '2') {
+			const cuatroXcuatro = document.getElementById('alta-vehiculo-cuatroXcuatro').checked;
+			const camioneta = new Camioneta(id, marca, modelo, precio, cuatroXcuatro);
+			vehiculos.push(camioneta);
+		}
+		cerrarFormAlta();
+		limpiarTabla();
+		llenarTabla(vehiculos);
+	} else {
+		alert('Debe completar todos los campos');
+	}
 };

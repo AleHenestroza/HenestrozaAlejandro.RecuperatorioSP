@@ -10,48 +10,86 @@
 		<script src="js/app.js"></script>
 	</head>
 	<body>
-		<div class="container">
-			<h1>ABM VEHICULOS</h1>
-			<h2>Filtros</h2>
-			<div class="filters">
-				<div>
-					<label for="filter-vehiculo">Filtrar por:</label>
-					<select name="filter-vehiculo" id="filter-vehiculo" onchange="filtrarTabla()">
-						<option value="0">Todos</option>
-						<option value="1">Auto</option>
-						<option value="2">Camioneta</option>
-					</select>
+		<div class="divFlex">
+			<div class="container">
+				<h1>ABM VEHICULOS</h1>
+				<h2>Filtros</h2>
+				<div class="filters">
+					<div>
+						<label for="filter-vehiculo">Filtrar por:</label>
+						<select name="filter-vehiculo" id="filter-vehiculo" onchange="filtrarTabla()">
+							<option value="0">Todos</option>
+							<option value="1">Auto</option>
+							<option value="2">Camioneta</option>
+						</select>
+					</div>
+					<div>
+						<label for="promedio">Promedio de precio:</label>
+						<input type="number" name="promedio" id="promedio" disabled />
+					</div>
+					<button id="calcular-promedio" onclick="calcularPromedio()">Calcular Promedio</button>
 				</div>
-				<div>
-					<label for="promedio">Promedio de precio:</label>
-					<input type="number" name="promedio" id="promedio" disabled />
+				<hr />
+				<h2>Lista de Vehiculos</h2>
+				<div class="filter-checkboxes">
+					<label for="vehiculo-marca">Marca <input type="checkbox" name="columnas" id="checkbox-1" checked="true" onchange="toggleColumn(1)" /></label>
+					<label for="vehiculo-modelo">Modelo <input type="checkbox" name="columnas" id="checkbox-2" checked="true" onchange="toggleColumn(2)" /></label>
+					<label for="vehiculo-precio">Precio <input type="checkbox" name="columnas" id="checkbox-3" checked="true" onchange="toggleColumn(3)" /></label>
 				</div>
-				<button id="calcular-promedio" onclick="calcularPromedio()">Calcular Promedio</button>
-			</div>
-			<hr />
-			<h2>Lista de Vehiculos</h2>
-			<div class="filter-checkboxes">
-				<label for="vehiculo-id">ID <input type="checkbox" name="vehiculo-id" id="vehiculo-id" /></label>
-				<label for="vehiculo-marca">Marca <input type="checkbox" name="vehiculo-marca" id="vehiculo-marca" /></label>
-				<label for="vehiculo-modelo">Modelo <input type="checkbox" name="vehiculo-modelo" id="vehiculo-modelo" /></label>
-				<label for="vehiculo-precio">Precio <input type="checkbox" name="vehiculo-precio" id="vehiculo-precio" /></label>
-			</div>
-			<div class="list">
-				<table class="table-vehiculos">
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>Marca</th>
-							<th>Modelo</th>
-							<th>Precio</th>
-							<th>Acción</th>
-						</tr>
-					</thead>
-					<tbody id="table-body"></tbody>
-				</table>
-			</div>
+				<div class="list">
+					<table class="table-vehiculos">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th id="column-1">Marca</th>
+								<th id="column-2">Modelo</th>
+								<th id="column-3">Precio</th>
+								<th>Acción</th>
+							</tr>
+						</thead>
+						<tbody id="table-body"></tbody>
+					</table>
+				</div>
 
-			<button id="agregar">Add</button>
+				<button id="agregar">Add</button>
+			</div>
+			<div id="alta" class="float-container hidden">
+				<h2>Alta Vehículo</h2>
+				<div class="form-container">
+					<form id="form-alta">
+						<div class="form-group">
+							<label for="marca">Marca</label>
+							<input type="text" name="marca" id="alta-vehiculo-marca" />
+						</div>
+						<div class="form-group">
+							<label for="modelo">Modelo</label>
+							<input type="text" name="modelo" id="alta-vehiculo-modelo" />
+						</div>
+						<div class="form-group">
+							<label for="precio">Precio</label>
+							<input type="number" name="precio" id="alta-vehiculo-precio" />
+						</div>
+						<div class="form-group">
+							<label for="vehiculo">Vehículo</label>
+							<select name="vehiculo" id="alta-vehiculo-tipo">
+								<option value="1">Auto</option>
+								<option value="2">Camioneta</option>
+							</select>
+						</div>
+						<div id="input-auto" class="form-group hidden">
+							<label for="puertas">Cant. Puertas</label>
+							<input type="number" name="puertas" id="alta-vehiculo-puertas" />
+						</div>
+						<div id="input-camioneta" class="form-group hidden">
+							<label for="cuatroXcuatro">Es 4x4 <input type="checkbox" name="cuatroXcuatro" id="alta-vehiculo-cuatroXcuatro" /></label>
+						</div>
+						<div class="buttons">
+							<button id="btn-exit">Cerrar</button>
+							<button id="btn-alta">Agregar</button>
+						</div>
+					</form>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>

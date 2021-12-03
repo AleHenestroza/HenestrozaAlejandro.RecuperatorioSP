@@ -10,6 +10,16 @@ html {
 body {
 	background: #f2f2f2;
 }
+.divFlex {
+	display: flex;
+	margin: auto;
+	width: 80%;
+	height: 100vh;
+	justify-content: flex-start;
+	align-items: center;
+	flex-direction: column;
+	padding: 4rem 1rem;
+}
 .container {
 	width: 100%;
 	max-width: 1200px;
@@ -56,4 +66,46 @@ td {
 	box-shadow: 1px 1px 1px black;
 	align-self: flex-end;
 	margin: 1rem 0;
+	cursor: pointer;
+}
+.hidden {
+	display: none !important;
+}
+.float-container {
+	position: absolute;
+	z-index: 1;
+	width: 100%;
+	max-width: 300px;
+	height: 450px;
+	top: 200px;
+	padding: 1rem;
+	margin: auto;
+	background-color: rgb(197, 230, 177);
+	border: 1px solid rgb(0, 0, 0);
+	box-shadow: 1px 1px 1px black;
+}
+.form-container {
+	display: flex;
+	flex-direction: column;
+	margin: 2rem 0;
+}
+.form-group {
+	display: flex;
+	flex-direction: column;
+	margin: 1rem 0;
+}
+.buttons {
+	display: flex;
+	justify-content: space-between;
+	margin: 1rem 0;
+}
+#btn-exit {
+	background-color: rgb(255, 123, 0);
+	margin-top: 0.5rem;
+	padding: 0.5rem 1rem;
+}
+#btn-alta {
+	background-color: rgb(140, 160, 223);
+	margin-top: 0.5rem;
+	padding: 0.5rem 1rem;
 }
