@@ -3,9 +3,14 @@ const vehiculos = [];
 let vehiculosMostrados = [];
 
 window.addEventListener('load', () => {
+	document.getElementById('filter-vehiculo').addEventListener('change', filtrarTabla);
+	document.getElementById('calcular-promedio').addEventListener('click', calcularPromedio);
 	document.getElementById('agregar').addEventListener('click', abrirFormAlta);
-	document.getElementById('btn-exit').addEventListener('click', cerrarFormAlta);
 	document.getElementById('alta-vehiculo-tipo').addEventListener('click', mostrarInputAlta);
+	document.getElementById('btn-exit').addEventListener('click', event => {
+		event.preventDefault();
+		cerrarFormAlta();
+	});
 	document.getElementById('btn-alta').addEventListener('click', event => {
 		event.preventDefault();
 		agregarVehiculo();
